@@ -8,4 +8,3 @@ public class UnexistentSkuException extends RuntimeException {
         super(NON_EXISTENT_SKU_MESSAGE.formatted(sku));
     }
 }
-
