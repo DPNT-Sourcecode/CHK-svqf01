@@ -57,9 +57,10 @@ public enum SkuTypes {
     }
     
     public Character getCharacter(){
-        return this.getCharacter();
+        return this.toString().charAt(0);
     }
 
 
 }
+
 

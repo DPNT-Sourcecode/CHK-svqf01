@@ -60,12 +60,12 @@ public class Inventory {
         //Sort them in a descendent way by price
         groupOfferSkuTypes.sort((v1, v2) -> v2.getSkuItem().getBaseCost() - v1.getSkuItem().getBaseCost());
 
-
-        int numberOfGroupOffer = getNumberOfGroupOffers(groupOfferSkuTypes, aux);
+        int numberOfGroupOffer = getNumberOfGroupOffers(groupOfferSkuTypes, groupSize);
 
         while(numberOfGroupOffer > 0){
             int totalItemsDecremented = 0;
             for (SkuTypes skuType: groupOfferSkuTypes) {
+                //We decrement a number of group-size items which means we need to add the groupValue to the total
                 if(totalItemsDecremented == groupSize){
                     break;
                 }
@@ -80,23 +80,27 @@ public class Inventory {
     }
 
     private int getNumberOfGroupOffers(List<SkuTypes> groupOfferSkuTypes, int groupSize) {
-        int [] auxiliarArray = new int[groupSize];
+        int [] auxiliaryArray = new int[groupSize];
 
+        //Create an array of groupSize where the min value is the max number of groups offers.
         groupOfferSkuTypes.forEach((skuTypes -> {
-            for(int i = 0; i < auxiliarArray.length; i++){
-                if(checkoutItems.containsKey(skuTypes.getCharacter()) && checkoutItems.get(skuTypes.getCharacter()).getCount() > auxiliarArray[i]){
-                    auxiliarArray[i] = checkoutItems.get(skuTypes.getCharacter()).getCount();
+            for(int i = 0; i < auxiliaryArray.length; i++){
+                if(checkoutItems.containsKey(skuTypes.getCharacter()) &&
+                    checkoutItems.get(skuTypes.getCharacter()).getCount() > auxiliaryArray[i]){
+                    auxiliaryArray[i] = checkoutItems.get(skuTypes.getCharacter()).getCount();
                     break;
                 }
             }
         }));
 
-        int numberOfGroupOffer = Integer.MAX_VALUE;
-        for (int j : auxiliarArray) {
-            if (numberOfGroupOffer > j)
-                numberOfGroupOffer = j;
+        int numberOfGroupOffers = Integer.MAX_VALUE;
+
+        //Find the min value in the array with points to the max number of group offers possible.
+        for (int j : auxiliaryArray) {
+            if (numberOfGroupOffers > j)
+                numberOfGroupOffers = j;
         }
-        return numberOfGroupOffer;
+        return numberOfGroupOffers;
     }
 
 
@@ -116,6 +120,7 @@ public class Inventory {
 
 
 }
+
 
 
 
