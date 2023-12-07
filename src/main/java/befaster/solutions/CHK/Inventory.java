@@ -14,7 +14,7 @@ public class Inventory {
     public Integer calculateTotal(final String skus){
         final AtomicInteger checkoutValue = new AtomicInteger();
         updateCheckoutList(skus);
-
+        removeFreeItems();
         checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
         return checkoutValue.get();
     }
@@ -37,10 +37,19 @@ public class Inventory {
     }
 
     private void removeFreeItems() {
-        if(checkoutItems.get(SkuTypes.B).getCount() == )
-        checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
+        if(checkoutItems.containsKey(SkuTypes.B.toString().charAt(0)) && checkoutItems.containsKey(SkuTypes.E.toString().charAt(0)))
+        {
+            final Sku skuBItem = checkoutItems.get(SkuTypes.B.toString().charAt(0));
+            int totalNumberOfBItems = skuBItem.getCount();
+            int totalNumberOfEItems = checkoutItems.get(SkuTypes.E.toString().charAt(0)).getCount();
+
+            if(totalNumberOfBItems > 0 && totalNumberOfEItems >= 2){
+                int numberOfFreeItems = totalNumberOfEItems / 2;
+                skuBItem.setCount(totalNumberOfBItems - numberOfFreeItems);
+            }
+        }
+
     }
 
 
 }
-

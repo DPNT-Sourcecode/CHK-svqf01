@@ -38,6 +38,10 @@ public abstract class Sku {
         return count;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public Integer totalCost() {
         int discountValue = calculateDiscountValue(count);
         return (baseCost * count) - discountValue;
@@ -56,6 +60,3 @@ public abstract class Sku {
         return discount.get();
     }
 }
-
-
-
