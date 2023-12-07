@@ -77,13 +77,16 @@ public class Inventory {
         while(numberOfGroupOffer > 0){
             int totalItemsDecremented = 0;
             for (SkuTypes skuType: groupOfferSkuTypes) {
+                if(totalItemsDecremented == 3){
+                    break;
+                }
                 if(checkoutItems.containsKey(skuType.toString().charAt(0))){
                     checkoutItems.get(skuType.toString().charAt(0)).decrementCount();
                     totalItemsDecremented++;
                 }
             }
-            checkoutValue.addAndGet(45 * (totalItemsDecremented % 3));
-            numberOfGroupOffer = numberOfGroupOffer - (totalItemsDecremented % 3);
+            checkoutValue.addAndGet(45 );
+            numberOfGroupOffer--;
         }
 
     }
@@ -105,5 +108,6 @@ public class Inventory {
 
 
 }
+
 
 
