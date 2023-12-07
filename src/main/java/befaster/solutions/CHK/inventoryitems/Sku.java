@@ -8,7 +8,7 @@ public abstract class Sku {
 
     private int discountUnitPackage;
 
-    private int count = 0;
+    private int count = 1;
 
     private SkuTypes skuType;
 
@@ -30,3 +30,4 @@ public abstract class Sku {
 
 
 }
+

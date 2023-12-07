@@ -9,7 +9,7 @@ import befaster.solutions.CHK.inventoryitems.SkuTypes;
 
 public class Inventory {
 
-    private final Map<Character, Sku> checkoutItems = new HashMap<>();
+    private Map<Character, Sku> checkoutItems;
 
     public Integer calculateTotal(final String skus){
         final AtomicInteger checkoutValue = new AtomicInteger();
@@ -19,6 +19,7 @@ public class Inventory {
     }
 
     private void updateCheckoutList(final String skus) {
+        checkoutItems = new HashMap<>();
         for (int i = 0; i < skus.length(); i++) {
             final Character sku = skus.charAt(i);
             checkoutItems.compute(sku, (k, v) -> {
@@ -34,3 +35,4 @@ public class Inventory {
 
 
 }
+
