@@ -45,17 +45,50 @@ public class Inventory {
         removeFreeItemsIfPossible(SkuTypes.N.toString().charAt(0), SkuTypes.M.toString().charAt(0), 3);
         removeFreeItemsIfPossible(SkuTypes.R.toString().charAt(0), SkuTypes.Q.toString().charAt(0), 3);
         removeFreeItemsIfPossible(SkuTypes.U.toString().charAt(0), SkuTypes.U.toString().charAt(0), 4);
+        removeGroupingOffer();
     }
 
     private void removeGroupingOffer(){
         List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.Z, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
         groupOfferSkuTypes.sort(Comparator.comparingInt(skuType -> skuType.getSkuItem().getBaseCost()));
-        final int requiredNumberItemsForGroupOffer = 3;
-        int numberOfGroupOffersFound = 0;
 
-        int []
+        int [] aux = new int[3];
 
-        groupOfferSkuTypes.forEach((skuTypes -> checkoutItems.));
+        groupOfferSkuTypes.forEach((skuTypes -> {
+            for(int i = 0; i < aux.length; i++){
+                if(checkoutItems.get(skuTypes.toString().charAt(0)).getCount() > aux[i]){
+                    aux[i] = checkoutItems.get(skuTypes.toString().charAt(0)).getCount();
+                    break;
+                }
+            }
+        }));
+        int numberOfGroupOffer = Integer.MAX_VALUE;
+        for (int j : aux) {
+            if (numberOfGroupOffer > j)
+                numberOfGroupOffer = j;
+        }
+
+        System.out.println(numberOfGroupOffer);
+
+
+//        final int requiredNumberItemsForGroupOffer = 3;
+//        int numberOfGroupOffersFound = 0;
+//
+//        List<Sku> skusToHaveCountDecremented = new ArrayList<>();
+//
+//        int numberOfItemsBelongingToGroupFound = 0;
+//        for(SkuTypes skuType : groupOfferSkuTypes){
+//            if(numberOfItemsBelongingToGroupFound == 3){
+//                numberOfGroupOffersFound++;
+//                numberOfItemsBelongingToGroupFound = 0;
+//            }
+//            if(checkoutItems.containsKey(skuType.toString().charAt(0))){
+//                numberOfItemsBelongingToGroupFound++;
+//            }
+//        }
+
+
+
 
     }
 
@@ -76,3 +109,4 @@ public class Inventory {
 
 
 }
+
