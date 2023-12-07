@@ -14,6 +14,7 @@ public class Inventory {
     public Integer calculateTotal(final String skus){
         final AtomicInteger checkoutValue = new AtomicInteger();
         updateCheckoutList(skus);
+
         checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
         return checkoutValue.get();
     }
@@ -35,5 +36,11 @@ public class Inventory {
         }
     }
 
+    private void removeFreeItems() {
+        if(checkoutItems.get(SkuTypes.B).getCount() == )
+        checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
+    }
+
 
 }
+
