@@ -40,11 +40,15 @@ public abstract class Sku {
 
     private Integer calculateDiscountValue(int numberOfUnits) {
         AtomicInteger discount = new AtomicInteger();
-        discountPairs.forEach((numberOfUnitsForDiscount, discountValue) ->
-            discount.addAndGet((numberOfUnits / numberOfUnitsForDiscount) * discountValue)
+        AtomicInteger numberOfRemainingUnits = new AtomicInteger(numberOfUnits);
+        discountPairs.forEach((numberOfUnitsForDiscount, discountValue) -> {
+            discount.addAndGet((numberOfRemainingUnits.get() / numberOfUnitsForDiscount) * discountValue);
+            numberOfRemainingUnits.updateAndGet((val) -> val / numberOfUnitsForDiscount );
+            }
         );
         return discount.get();
     }
 }
+
 
 
