@@ -104,9 +104,14 @@ public class CheckoutTest {
     public void checkOutGroupOffers() {
         assertThat(checkoutSolution.checkout("STX"), equalTo(45));
         assertThat(checkoutSolution.checkout("STXZ"), equalTo(62));
+        assertThat(checkoutSolution.checkout("STX"), equalTo(45));
+        assertThat(checkoutSolution.checkout("STY"), equalTo(45));
+        assertThat(checkoutSolution.checkout("STYZ"), equalTo(66));
+        assertThat(checkoutSolution.checkout("ASTX"), equalTo(95));
     }
 
 
 }
+
 
 
