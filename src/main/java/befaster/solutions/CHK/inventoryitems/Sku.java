@@ -46,13 +46,9 @@ public abstract class Sku {
                     discount.addAndGet((numberOfRemainingUnits.get() / numberOfUnitsForDiscount) * discountValue);
                     numberOfRemainingUnits.updateAndGet(val -> val % numberOfUnitsForDiscount );
                 }
+                System.out.println("Number of units is " + numberOfUnits + " and the current discount is " + discount);
             }
         );
         return discount.get();
     }
 }
-
-
-
-
-

@@ -13,4 +13,3 @@ public class ItemB extends Sku{
     }
 
 }
-
