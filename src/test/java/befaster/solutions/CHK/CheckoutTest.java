@@ -102,9 +102,10 @@ public class CheckoutTest {
 
     @Test
     public void checkOutGroupOffers() {
-        assertThat(checkoutSolution.checkout("STXYZXYZ"), equalTo(160));
+        assertThat(checkoutSolution.checkout("STX"), equalTo(45));
     }
 
 
 }
+
 

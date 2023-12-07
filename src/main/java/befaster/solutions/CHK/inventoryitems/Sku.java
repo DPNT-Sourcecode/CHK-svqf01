@@ -30,6 +30,10 @@ public abstract class Sku {
         count++;
     }
 
+    public void decrementCount() {
+        count--;
+    }
+
     public void resetCount() {
         count = 1;
     }

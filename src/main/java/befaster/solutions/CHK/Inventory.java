@@ -13,9 +13,11 @@ import befaster.solutions.CHK.inventoryitems.SkuTypes;
 public class Inventory {
 
     private Map<Character, Sku> checkoutItems;
+    private AtomicInteger checkoutValue;
+
 
     public Integer calculateTotal(final String skus){
-        final AtomicInteger checkoutValue = new AtomicInteger();
+        checkoutValue = new AtomicInteger();
         updateCheckoutList(skus);
         removeFreeItemsWithPromotions();
         checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
@@ -56,7 +58,7 @@ public class Inventory {
 
         groupOfferSkuTypes.forEach((skuTypes -> {
             for(int i = 0; i < aux.length; i++){
-                if(checkoutItems.get(skuTypes.toString().charAt(0)).getCount() > aux[i]){
+                if(checkoutItems.containsKey(skuTypes.toString().charAt(0)) && checkoutItems.get(skuTypes.toString().charAt(0)).getCount() > aux[i]){
                     aux[i] = checkoutItems.get(skuTypes.toString().charAt(0)).getCount();
                     break;
                 }
@@ -71,24 +73,20 @@ public class Inventory {
         System.out.println(numberOfGroupOffer);
 
 
-//        final int requiredNumberItemsForGroupOffer = 3;
-//        int numberOfGroupOffersFound = 0;
-//
-//        List<Sku> skusToHaveCountDecremented = new ArrayList<>();
-//
-//        int numberOfItemsBelongingToGroupFound = 0;
-//        for(SkuTypes skuType : groupOfferSkuTypes){
-//            if(numberOfItemsBelongingToGroupFound == 3){
-//                numberOfGroupOffersFound++;
-//                numberOfItemsBelongingToGroupFound = 0;
-//            }
-//            if(checkoutItems.containsKey(skuType.toString().charAt(0))){
-//                numberOfItemsBelongingToGroupFound++;
-//            }
-//        }
+        while(numberOfGroupOffer > 0){
+            int totalItemsDecremented = 0;
+            for (SkuTypes skuType: groupOfferSkuTypes) {
+                if(totalItemsDecremented % 3 == 0){
+                    numberOfGroupOffer--;
+                    checkoutValue.addAndGet(45);
 
-
-
+                }
+                if(checkoutItems.containsKey(skuType.toString().charAt(0))){
+                    checkoutItems.get(skuType.toString().charAt(0)).decrementCount();
+                    totalItemsDecremented++;
+                }
+            }
+        }
 
     }
 
@@ -109,4 +107,5 @@ public class Inventory {
 
 
 }
+
 
