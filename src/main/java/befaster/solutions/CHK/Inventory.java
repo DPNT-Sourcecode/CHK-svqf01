@@ -24,7 +24,9 @@ public class Inventory {
             final Character sku = skus.charAt(i);
             checkoutItems.compute(sku, (k, v) -> {
                 if (v == null) {
-                    return SkuTypes.getSkuTypeByCharacter(sku).getSkuItem();
+                    final Sku item = SkuTypes.getSkuTypeByCharacter(sku).getSkuItem();
+                    item.resetCount();
+                    return item;
                 } else {
                     v.incrementCount();
                     return v;
@@ -35,4 +37,5 @@ public class Inventory {
 
 
 }
+
 

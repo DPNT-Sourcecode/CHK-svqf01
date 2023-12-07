@@ -23,11 +23,16 @@ public abstract class Sku {
         count++;
     }
 
+    public void resetCount(){
+        count = 1;
+    }
+
     public Integer totalCost() {
-        int numberOfTimesToApplyDiscount = count / discountUnitPackage;
+        int numberOfTimesToApplyDiscount = discountUnitPackage == 0 ? 0 : count / discountUnitPackage;
         return (baseCost * count) - numberOfTimesToApplyDiscount * discountCost;
     }
 
 
 }
+
 
