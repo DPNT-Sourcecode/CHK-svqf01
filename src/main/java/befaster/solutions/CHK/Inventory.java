@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -42,8 +43,17 @@ public class Inventory {
         removeFreeItemsIfPossible(SkuTypes.N.toString().charAt(0), SkuTypes.M.toString().charAt(0), 3);
         removeFreeItemsIfPossible(SkuTypes.R.toString().charAt(0), SkuTypes.Q.toString().charAt(0), 3);
         removeFreeItemsIfPossible(SkuTypes.U.toString().charAt(0), SkuTypes.U.toString().charAt(0), 4);
+    }
+
+    private void removeGroupingOffer(){
+        List<SkuTypes> groupOfferSkuTypes = List.of(SkuTypes.Z, SkuTypes.Y, SkuTypes.X, SkuTypes.Y, SkuTypes.Z);
+        final int requiredNumberItemsForGroupOffer = 3;
+        List.of
+
+        groupOfferSkuTypes.forEach((skuTypes -> checkoutItems.));
 
     }
+
 
     private void removeFreeItemsIfPossible(Character promoSkuType, Character freeSkuType, Integer numberOfItemsPerPromo) {
         if(checkoutItems.containsKey(promoSkuType) && checkoutItems.containsKey(freeSkuType))
@@ -61,3 +71,4 @@ public class Inventory {
 
 
 }
+
