@@ -81,7 +81,6 @@ public class Inventory {
                     numberOfGroupOffer--;
                     checkoutValue.addAndGet(45);
                     break;
-
                 }
                 if(checkoutItems.containsKey(skuType.toString().charAt(0))){
                     checkoutItems.get(skuType.toString().charAt(0)).decrementCount();
@@ -109,8 +108,3 @@ public class Inventory {
 
 
 }
-
-
-
-
-
