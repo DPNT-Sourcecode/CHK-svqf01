@@ -77,7 +77,7 @@ public class Inventory {
         while(numberOfGroupOffer > 0){
             int totalItemsDecremented = 0;
             for (SkuTypes skuType: groupOfferSkuTypes) {
-                if(totalItemsDecremented == 3){
+                if(totalItemsDecremented != 0 && totalItemsDecremented % 3 == 0){
                     numberOfGroupOffer--;
                     checkoutValue.addAndGet(45);
                     break;
@@ -108,3 +108,4 @@ public class Inventory {
 
 
 }
+
