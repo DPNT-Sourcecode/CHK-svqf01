@@ -52,7 +52,7 @@ public class Inventory {
 
     private void removeGroupingOffer(){
         List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.S, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
-        groupOfferSkuTypes.sort(Comparator.comparingInt(skuType -> skuType.getSkuItem().getBaseCost()));
+        groupOfferSkuTypes.sort((v1, v2) -> v2.getSkuItem().getBaseCost() - v1.getSkuItem().getBaseCost());
 
         int [] aux = new int[3];
 
@@ -80,7 +80,6 @@ public class Inventory {
                 if(totalItemsDecremented == 3){
                     numberOfGroupOffer--;
                     checkoutValue.addAndGet(45);
-                    totalItemsDecremented = 0;
                     break;
 
                 }
@@ -110,6 +109,7 @@ public class Inventory {
 
 
 }
+
 
 
 
