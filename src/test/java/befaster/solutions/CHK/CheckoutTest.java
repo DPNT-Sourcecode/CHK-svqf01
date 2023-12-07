@@ -18,7 +18,7 @@ public class CheckoutTest {
 
     @Test
     public void checkoutInvalidInput() {
-        assertThat(checkoutSolution.checkout("ABDL"), equalTo(-1));
+        assertThat(checkoutSolution.checkout("ABD-"), equalTo(-1));
         assertThat(checkoutSolution.checkout("123"), equalTo(-1));
         assertThat(checkoutSolution.checkout("ABD3"), equalTo(-1));
     }
@@ -56,7 +56,7 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("QQQ"), equalTo(80));
 
         assertThat(checkoutSolution.checkout("VV"), equalTo(90));
-        assertThat(checkoutSolution.checkout("VVV"), equalTo(139));
+        assertThat(checkoutSolution.checkout("VVV"), equalTo(130));
 
     }
 
@@ -81,5 +81,6 @@ public class CheckoutTest {
 
 
 }
+
 
 
