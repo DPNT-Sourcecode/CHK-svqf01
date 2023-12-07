@@ -10,5 +10,3 @@ public class HelloSolution {
         return HELLO_TO_THE_WORLD_MESSAGE.formatted(friendName);
     }
 }
-
-
