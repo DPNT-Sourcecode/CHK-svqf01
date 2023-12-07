@@ -17,6 +17,10 @@ public enum SkuTypes {
         this.skuItem = skuItem;
     }
 
+    public Sku getSkuItem() {
+        return skuItem;
+    }
+
     public static boolean doesSkuTypeExist(final Character possibleSku){
         return Stream.of(SkuTypes.values())
             .anyMatch(skuType-> skuType.name().equals(possibleSku.toString()));
@@ -32,4 +36,3 @@ public enum SkuTypes {
 
 
 }
-

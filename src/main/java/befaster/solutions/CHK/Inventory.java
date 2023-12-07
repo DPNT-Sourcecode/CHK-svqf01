@@ -1,32 +1,36 @@
 package befaster.solutions.CHK;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import befaster.solutions.CHK.inventoryitems.Sku;
 import befaster.solutions.CHK.inventoryitems.SkuTypes;
 
 public class Inventory {
 
-    List<Sku> checkoutItems = new ArrayList<Sku>();
+    private final Map<Character, Sku> checkoutItems = new HashMap<>();
 
+    public Integer calculateTotal(final String skus){
+        final AtomicInteger checkoutValue = new AtomicInteger();
+        updateCheckoutList(skus);
+        checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
+        return checkoutValue.get();
+    }
 
-//    public Integer calculateTotal(final String skus){
-//        for (int i = 0; i < skus.length(); i++) {
-//            final Character sku = skus.charAt(i);
-//            SkuTypes skuType = SkuTypes.getSkuTypeByCharacter(sku);
-//
-////            totalNumberOfItems.compute(sku, (k, v) -> {
-////                if(v == null){
-////                    return 1;
-////                }
-////                else{
-////                    return ++v;
-////                }
-////            });
-//        }
-//    }
+    private void updateCheckoutList(final String skus) {
+        for (int i = 0; i < skus.length(); i++) {
+            final Character sku = skus.charAt(i);
+            checkoutItems.compute(sku, (k, v) -> {
+                if (v == null) {
+                    return SkuTypes.getSkuTypeByCharacter(sku).getSkuItem();
+                } else {
+                    v.incrementCount();
+                    return v;
+                }
+            });
+        }
+    }
 
 
 }
-

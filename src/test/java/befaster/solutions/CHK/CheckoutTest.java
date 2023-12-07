@@ -3,7 +3,6 @@ package befaster.solutions.CHK;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import befaster.solutions.HLO.HelloSolution;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -22,6 +21,11 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("ABDL"), equalTo(-1));
         assertThat(checkoutSolution.checkout("123"), equalTo(-1));
         assertThat(checkoutSolution.checkout("ABD3"), equalTo(-1));
+    }
+
+    @Test
+    public void checkOutNoDiscounts() {
+        assertThat(checkoutSolution.checkout("AA"), equalTo(100));
     }
 
 }
