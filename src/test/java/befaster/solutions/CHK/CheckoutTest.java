@@ -30,6 +30,9 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("AB"), equalTo(80));
         assertThat(checkoutSolution.checkout("ABA"), equalTo(130));
         assertThat(checkoutSolution.checkout("ABCD"), equalTo(115));
+
+        assertThat(checkoutSolution.checkout("FF"), equalTo(20));
+
     }
 
     @Test
@@ -44,16 +47,28 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("EE"), equalTo(80));
         assertThat(checkoutSolution.checkout("AEAAAEA"), equalTo(280));
 
+
+
+    }
+
+    @Test
+    public void checkOutFreeItems() {
         assertThat(checkoutSolution.checkout("EEEEBB"), equalTo(160));
         assertThat(checkoutSolution.checkout("BEBEEE"), equalTo(160));
 
         assertThat(checkoutSolution.checkout("FFF"), equalTo(20));
-        assertThat(checkoutSolution.checkout("FF"), equalTo(20));
         assertThat(checkoutSolution.checkout("FFFF"), equalTo(30));
+        assertThat(checkoutSolution.checkout("FFFFFF"), equalTo(40));
         assertThat(checkoutSolution.checkout("FFFFF"), equalTo(40));
         assertThat(checkoutSolution.checkout("FFFFFF"), equalTo(40));
+
+
+        assertThat(checkoutSolution.checkout("FFFFFF"), equalTo(40));
+
+
 
     }
 
 
 }
+
