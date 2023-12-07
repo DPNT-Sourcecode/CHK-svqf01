@@ -51,7 +51,7 @@ public class Inventory {
     }
 
     private void removeGroupingOffer(){
-        List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.Z, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
+        List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.S, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
         groupOfferSkuTypes.sort(Comparator.comparingInt(skuType -> skuType.getSkuItem().getBaseCost()));
 
         int [] aux = new int[3];
@@ -65,10 +65,6 @@ public class Inventory {
             }
         }));
 
-        for (int i = 0; i < aux.length; i++) {
-            System.out.println(aux[i]);
-        }
-
         int numberOfGroupOffer = Integer.MAX_VALUE;
         for (int j : aux) {
             if (numberOfGroupOffer > j)
@@ -81,9 +77,11 @@ public class Inventory {
         while(numberOfGroupOffer > 0){
             int totalItemsDecremented = 0;
             for (SkuTypes skuType: groupOfferSkuTypes) {
-                if(totalItemsDecremented % 3 == 0){
+                if(totalItemsDecremented == 3){
                     numberOfGroupOffer--;
                     checkoutValue.addAndGet(45);
+                    totalItemsDecremented = 0;
+                    break;
 
                 }
                 if(checkoutItems.containsKey(skuType.toString().charAt(0))){
@@ -112,6 +110,7 @@ public class Inventory {
 
 
 }
+
 
 
 
