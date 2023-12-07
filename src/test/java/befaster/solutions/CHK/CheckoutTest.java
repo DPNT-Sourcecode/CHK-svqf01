@@ -32,6 +32,27 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("ABCD"), equalTo(115));
 
         assertThat(checkoutSolution.checkout("FF"), equalTo(20));
+
+        assertThat(checkoutSolution.checkout("G"), equalTo(20));
+        assertThat(checkoutSolution.checkout("H"), equalTo(10));
+        assertThat(checkoutSolution.checkout("I"), equalTo(35));
+        assertThat(checkoutSolution.checkout("J"), equalTo(60));
+        assertThat(checkoutSolution.checkout("K"), equalTo(80));
+        assertThat(checkoutSolution.checkout("L"), equalTo(90));
+        assertThat(checkoutSolution.checkout("M"), equalTo(15));
+        assertThat(checkoutSolution.checkout("N"), equalTo(40));
+        assertThat(checkoutSolution.checkout("O"), equalTo(10));
+        assertThat(checkoutSolution.checkout("P"), equalTo(50));
+        assertThat(checkoutSolution.checkout("Q"), equalTo(30));
+        assertThat(checkoutSolution.checkout("R"), equalTo(50));
+        assertThat(checkoutSolution.checkout("S"), equalTo(30));
+        assertThat(checkoutSolution.checkout("T"), equalTo(20));
+        assertThat(checkoutSolution.checkout("U"), equalTo(40));
+        assertThat(checkoutSolution.checkout("V"), equalTo(50));
+        assertThat(checkoutSolution.checkout("W"), equalTo(20));
+        assertThat(checkoutSolution.checkout("X"), equalTo(90));
+        assertThat(checkoutSolution.checkout("Y"), equalTo(10));
+        assertThat(checkoutSolution.checkout("Z"), equalTo(50));
     }
 
     @Test
@@ -81,6 +102,7 @@ public class CheckoutTest {
 
 
 }
+
 
 
 

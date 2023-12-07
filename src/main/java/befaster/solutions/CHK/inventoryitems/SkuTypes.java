@@ -28,7 +28,9 @@ public enum SkuTypes {
     T(new ItemT()),
     U(new ItemU()),
     V(new ItemV()),
+    W(new ItemW()),
     X(new ItemX()),
+    Y(new ItemY()),
     Z(new ItemZ())
     ;
 
@@ -56,4 +58,5 @@ public enum SkuTypes {
 
 
 }
+
 
