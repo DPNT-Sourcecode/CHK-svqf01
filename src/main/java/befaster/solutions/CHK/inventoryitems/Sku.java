@@ -42,15 +42,16 @@ public abstract class Sku {
         AtomicInteger discount = new AtomicInteger();
         AtomicInteger numberOfRemainingUnits = new AtomicInteger(numberOfUnits);
         discountPairs.forEach((numberOfUnitsForDiscount, discountValue) -> {
-                if(numberOfRemainingUnits.get() > numberOfUnitsForDiscount){
+                if(numberOfRemainingUnits.get() >= numberOfUnitsForDiscount){
                     discount.addAndGet((numberOfRemainingUnits.get() / numberOfUnitsForDiscount) * discountValue);
-                    numberOfRemainingUnits.updateAndGet(val -> val / numberOfUnitsForDiscount );
+                    numberOfRemainingUnits.updateAndGet(val -> val % numberOfUnitsForDiscount );
                 }
             }
         );
         return discount.get();
     }
 }
+
 
 
 

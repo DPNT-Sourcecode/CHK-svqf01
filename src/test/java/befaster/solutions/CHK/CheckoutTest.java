@@ -35,17 +35,18 @@ public class CheckoutTest {
     @Test
     public void checkOutDiscounts() {
         assertThat(checkoutSolution.checkout("AAA"), equalTo(130));
-//        assertThat(checkoutSolution.checkout("BB"), equalTo(45));
-//        assertThat(checkoutSolution.checkout("ABB"), equalTo(95));
-//        assertThat(checkoutSolution.checkout("AAAB"), equalTo(160));
-//        assertThat(checkoutSolution.checkout("AAABB"), equalTo(175));
+        assertThat(checkoutSolution.checkout("BB"), equalTo(45));
+        assertThat(checkoutSolution.checkout("ABB"), equalTo(95));
+        assertThat(checkoutSolution.checkout("AAAB"), equalTo(160));
+        assertThat(checkoutSolution.checkout("AAABB"), equalTo(175));
 
         assertThat(checkoutSolution.checkout("AAAAA"), equalTo(200));
-//        assertThat(checkoutSolution.checkout("EE"), equalTo(50));
-//        assertThat(checkoutSolution.checkout("AEAAAEA"), equalTo(250));
+        assertThat(checkoutSolution.checkout("EE"), equalTo(50));
+        assertThat(checkoutSolution.checkout("AEAAAEA"), equalTo(250));
     }
 
 
 }
+
 
 
