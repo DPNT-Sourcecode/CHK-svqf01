@@ -1,12 +1,11 @@
 package befaster.solutions.CHK.inventoryitems;
 
-public class ItemQ extends Sku {
+public class ItemR extends Sku {
 
-    private static final Integer BASE_COST = 30;
+    private static final Integer BASE_COST = 50;
 
-    public ItemQ() {
+    public ItemR() {
         super(BASE_COST);
-        addDiscount(3, 10);
     }
 
 }

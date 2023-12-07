@@ -9,4 +9,3 @@ public class ItemJ extends Sku {
     }
 
 }
-
