@@ -10,10 +10,11 @@ public class ItemA  extends Sku{
     private static final Map<Integer,Integer> DISCOUNT_PAIRS = new LinkedHashMap<>();
 
     public ItemA() {
+        super(BASE_COST, SkuTypes.A, DISCOUNT_PAIRS);
         DISCOUNT_PAIRS.put(5, 50);
         DISCOUNT_PAIRS.put(3, 20);
-        super(BASE_COST, SkuTypes.A, DISCOUNT_PAIRS);
     }
 
 }
+
 

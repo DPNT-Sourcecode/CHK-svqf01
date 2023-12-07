@@ -45,13 +45,12 @@ public abstract class Sku {
         discountPairs.forEach((numberOfUnitsForDiscount, discountValue) -> {
                 if(numberOfRemainingUnits.get() >= numberOfUnitsForDiscount){
                     discount.addAndGet((numberOfRemainingUnits.get() / numberOfUnitsForDiscount) * discountValue);
-                    System.out.println("number of discounts applied is " + (numberOfRemainingUnits.get() / numberOfUnitsForDiscount) );
                     numberOfRemainingUnits.updateAndGet(val -> val % numberOfUnitsForDiscount );
                 }
-                System.out.println("Number of units is " + numberOfUnits + " and the current discount is " + discount);
             }
         );
         return discount.get();
     }
 }
+
 
