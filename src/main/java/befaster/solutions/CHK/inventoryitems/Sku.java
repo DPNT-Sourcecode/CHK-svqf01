@@ -1,36 +1,42 @@
 package befaster.solutions.CHK.inventoryitems;
 
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public abstract class Sku {
 
     private int baseCost;
 
-    private int discountCost;
-
-    private int discountUnitPackage;
+    private final Map<Integer, Integer> discountPairs;
 
     private int count = 1;
-
     private SkuTypes skuType;
 
-    public Sku(int baseCost, int discountCost, int discountUnitPackage, SkuTypes skuType) {
+    public Sku(int baseCost,SkuTypes skuType, Map<Integer, Integer> discountPairs) {
         this.baseCost = baseCost;
-        this.discountCost = discountCost;
-        this.discountUnitPackage = discountUnitPackage;
         this.skuType = skuType;
+        this.discountPairs = discountPairs;
     }
 
-    public void incrementCount(){
+    public void incrementCount() {
         count++;
     }
 
-    public void resetCount(){
+    public void resetCount() {
         count = 1;
     }
 
     public Integer totalCost() {
-        int numberOfTimesToApplyDiscount = discountUnitPackage == 0 ? 0 : count / discountUnitPackage;
-        return (baseCost * count) - numberOfTimesToApplyDiscount * discountCost;
+        int discountValue = calculateDiscountValue(count);
+        return (baseCost * count) - discountValue;
     }
 
-
+    private Integer calculateDiscountValue(int numberOfUnits) {
+        AtomicInteger discount = new AtomicInteger();
+        discountPairs.forEach((numberOfUnitsForDiscount, discountValue) ->
+            discount.addAndGet((numberOfUnits / numberOfUnitsForDiscount) * discountValue)
+        );
+        return discount.get();
+    }
 }
+
