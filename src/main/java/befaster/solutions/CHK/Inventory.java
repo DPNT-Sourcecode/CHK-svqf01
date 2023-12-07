@@ -37,6 +37,9 @@ public class Inventory {
     }
 
     private void removeFreeItems() {
+
+        PentaConsumer<C>
+
         if(checkoutItems.containsKey(SkuTypes.B.toString().charAt(0)) && checkoutItems.containsKey(SkuTypes.E.toString().charAt(0)))
         {
             final Sku skuBItem = checkoutItems.get(SkuTypes.B.toString().charAt(0));
@@ -53,3 +56,4 @@ public class Inventory {
 
 
 }
+
