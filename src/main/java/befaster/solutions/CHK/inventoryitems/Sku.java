@@ -12,18 +12,14 @@ public abstract class Sku {
     private final Map<Integer, Integer> discountPairs;
 
     private int count = 1;
-    private SkuTypes skuType;
 
-    public Sku(int baseCost,SkuTypes skuType, Map<Integer, Integer> discountPairs) {
+    public Sku(int baseCost) {
         this.baseCost = baseCost;
-        this.skuType = skuType;
-        this.discountPairs = discountPairs;
+        this.discountPairs = new LinkedHashMap<>();
     }
 
-    public Sku(int baseCost,SkuTypes skuType) {
-        this.baseCost = baseCost;
-        this.skuType = skuType;
-        this.discountPairs = new LinkedHashMap<>();
+    public void addDiscount(final Integer numberOfItemsForDiscount, final Integer discountValue) {
+        discountPairs.put(numberOfItemsForDiscount, discountValue);
     }
 
     public void incrementCount() {
