@@ -62,20 +62,18 @@ public class Inventory {
 
         int numberOfGroupOffer = getNumberOfGroupOffers(groupOfferSkuTypes, groupSize);
 
-        while(numberOfGroupOffer > 0){
-            int totalItemsDecremented = 0;
+        checkoutValue.addAndGet(groupValue * numberOfGroupOffer);
+        int totalOfDecrementsNecessary = numberOfGroupOffer * groupSize;
+
+        while(totalOfDecrementsNecessary > 0){
             for (SkuTypes skuType: groupOfferSkuTypes) {
-                //We decrement a number of group-size items which means we need to add the groupValue to the total
-                if(totalItemsDecremented == groupSize){
-                    break;
-                }
                 if(checkoutItems.containsKey(skuType.getCharacter())){
-                    checkoutItems.get(skuType.getCharacter()).decrementCount();
-                    totalItemsDecremented++;
+                    Sku currentSku = checkoutItems.get(skuType.getCharacter());
+                    int skuCountAfterDecrement = Math.max(currentSku.getCount() - totalOfDecrementsNecessary, 0);
+                    totalOfDecrementsNecessary -= currentSku.getCount();
+                    currentSku.setCount(skuCountAfterDecrement);
                 }
             }
-            checkoutValue.addAndGet(groupValue );
-            numberOfGroupOffer--;
         }
     }
 
@@ -109,5 +107,6 @@ public class Inventory {
 
 
 }
+
 
 
