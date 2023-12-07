@@ -30,10 +30,20 @@ public class CheckoutTest {
         assertThat(checkoutSolution.checkout("AB"), equalTo(80));
         assertThat(checkoutSolution.checkout("ABA"), equalTo(130));
         assertThat(checkoutSolution.checkout("ABCD"), equalTo(115));
-
     }
 
+    @Test
+    public void checkOutDiscounts() {
+        assertThat(checkoutSolution.checkout("AAA"), equalTo(130));
+        assertThat(checkoutSolution.checkout("BB"), equalTo(45));
+        assertThat(checkoutSolution.checkout("ABB"), equalTo(95));
+        assertThat(checkoutSolution.checkout("AAAB"), equalTo(160));
+        assertThat(checkoutSolution.checkout("AAABB"), equalTo(175));
+    }
+
+
 }
+
 
 
 
