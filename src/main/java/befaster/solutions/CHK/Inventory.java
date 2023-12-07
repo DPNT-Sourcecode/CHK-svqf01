@@ -64,6 +64,11 @@ public class Inventory {
                 }
             }
         }));
+
+        for (int i = 0; i < aux.length; i++) {
+            System.out.println(aux[i]);
+        }
+
         int numberOfGroupOffer = Integer.MAX_VALUE;
         for (int j : aux) {
             if (numberOfGroupOffer > j)
@@ -107,5 +112,6 @@ public class Inventory {
 
 
 }
+
 
 
