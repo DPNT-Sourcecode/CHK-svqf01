@@ -80,27 +80,17 @@ public class Inventory {
     }
 
     private int getNumberOfGroupOffers(List<SkuTypes> groupOfferSkuTypes, int groupSize) {
-        int [] auxiliaryArray = new int[groupSize];
+        AtomicInteger numberOfGroupOffers = new AtomicInteger();
 
         //Create an array of groupSize where the min value is the max number of groups offers.
         groupOfferSkuTypes.forEach((skuTypes -> {
-            for(int i = 0; i < auxiliaryArray.length; i++){
-                if(checkoutItems.containsKey(skuTypes.getCharacter()) &&
-                    checkoutItems.get(skuTypes.getCharacter()).getCount() > auxiliaryArray[i]){
-                    auxiliaryArray[i] = checkoutItems.get(skuTypes.getCharacter()).getCount();
-                    break;
-                }
+            if(checkoutItems.containsKey(skuTypes.getCharacter()) &&
+                checkoutItems.get(skuTypes.getCharacter()).getCount() > groupSize){
+                numberOfGroupOffers.set(checkoutItems.get(skuTypes.getCharacter()).getCount());
             }
         }));
 
-        int numberOfGroupOffers = Integer.MAX_VALUE;
-
-        //Find the min value in the array with points to the max number of group offers possible.
-        for (int j : auxiliaryArray) {
-            if (numberOfGroupOffers > j)
-                numberOfGroupOffers = j;
-        }
-        return numberOfGroupOffers;
+        return numberOfGroupOffers.get() / groupSize;
     }
 
 
@@ -120,3 +110,4 @@ public class Inventory {
 
 
 }
+
