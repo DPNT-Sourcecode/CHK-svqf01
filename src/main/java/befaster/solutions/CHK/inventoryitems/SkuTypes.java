@@ -10,8 +10,8 @@ public enum SkuTypes {
     B(new ItemB()),
     C(new ItemC()),
     D(new ItemD()),
-
-    E(new ItemE());
+    E(new ItemE()),
+    F(new ItemF());
 
     private final Sku skuItem;
 

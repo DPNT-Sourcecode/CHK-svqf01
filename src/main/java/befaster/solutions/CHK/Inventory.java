@@ -14,7 +14,7 @@ public class Inventory {
     public Integer calculateTotal(final String skus){
         final AtomicInteger checkoutValue = new AtomicInteger();
         updateCheckoutList(skus);
-        removeFreeItems();
+        removeFreeItemsWithPromotions();
         checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
         return checkoutValue.get();
     }
@@ -36,27 +36,24 @@ public class Inventory {
         }
     }
 
-    private void removeFreeItems() {
-
-        removeBItemsIfPossible();
-
+    private void removeFreeItemsWithPromotions() {
+        removeFreeItemsIfPossible(SkuTypes.E.toString().charAt(0), SkuTypes.B.toString().charAt(0), 2);
+        removeFreeItemsIfPossible(SkuTypes.F.toString().charAt(0), SkuTypes.F.toString().charAt(0), 2);
     }
 
-    private void removeFreeItemsIfPossible(final Map<Character, Sku> checkoutItems, SkuTypes promoSku, SkuTypes freeSku,) {
-        if(checkoutItems.containsKey(SkuTypes.B.toString().charAt(0)) && checkoutItems.containsKey(SkuTypes.E.toString().charAt(0)))
+    private void removeFreeItemsIfPossible(Character promoSkuType, Character freeSkuType, Integer numberOfItemsPerPromo) {
+        if(checkoutItems.containsKey(promoSkuType) && checkoutItems.containsKey(freeSkuType))
         {
-            final Sku skuBItem = checkoutItems.get(SkuTypes.B.toString().charAt(0));
-            int totalNumberOfBItems = skuBItem.getCount();
-            int totalNumberOfEItems = checkoutItems.get(SkuTypes.E.toString().charAt(0)).getCount();
+            final Sku freeSkuItem = checkoutItems.get(freeSkuType);
+            int totalNumberOfPossibleFreeItems = freeSkuItem.getCount();
+            int totalNumberOfPromoItems = checkoutItems.get(promoSkuType).getCount();
 
-            if(totalNumberOfBItems > 0 && totalNumberOfEItems >= 2){
-                int numberOfFreeItems = totalNumberOfEItems / 2;
-                skuBItem.setCount(totalNumberOfBItems - numberOfFreeItems);
+            if(totalNumberOfPossibleFreeItems > 0 && totalNumberOfPromoItems >= numberOfItemsPerPromo){
+                int numberOfFreeItems = totalNumberOfPromoItems / numberOfItemsPerPromo;
+                freeSkuItem.setCount(totalNumberOfPossibleFreeItems - numberOfFreeItems);
             }
         }
     }
 
 
 }
-
-
