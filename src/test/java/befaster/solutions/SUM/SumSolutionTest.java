@@ -1,5 +1,6 @@
 package befaster.solutions.SUM;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -23,19 +24,21 @@ public class SumSolutionTest {
 
     @Test
     public void compute_sum_invalid_digits(){
-        assert(sum.compute(101, 5), instanceOf(RuntimeException.class));
-        assertThat(sum.compute(5, 101), instanceOf(RuntimeException.class));
-        assertThat(sum.compute(101, 101), instanceOf(RuntimeException.class));
+        //over 100
+        Assertions.assertThrows(RuntimeException.class, () -> sum.compute(101, 5));
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(5, 101));
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(101, 101));
 
-        assertThat(sum.compute(-5, 1), instanceOf(RuntimeException.class));
-        assertThat(sum.compute(1, -5), instanceOf(RuntimeException.class));
-        assertThat(sum.compute(-5, -5), instanceOf(RuntimeException.class));
+        //under 0
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(-5, 1));
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(1, -5));
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(-5, -5));
 
-        assertThat(sum.compute(101, -5), instanceOf(RuntimeException.class));
-
-
+        //over 100 and under 0
+        Assertions.assertThrows(RuntimeException.class,()->  sum.compute(101, -5));
     }
 
 
 }
+
 
