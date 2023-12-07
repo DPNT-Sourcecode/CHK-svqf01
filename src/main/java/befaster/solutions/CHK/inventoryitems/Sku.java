@@ -1,5 +1,6 @@
 package befaster.solutions.CHK.inventoryitems;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,6 +17,12 @@ public abstract class Sku {
         this.baseCost = baseCost;
         this.skuType = skuType;
         this.discountPairs = discountPairs;
+    }
+
+    public Sku(int baseCost,SkuTypes skuType) {
+        this.baseCost = baseCost;
+        this.skuType = skuType;
+        this.discountPairs = new HashMap<>();
     }
 
     public void incrementCount() {
@@ -39,4 +46,5 @@ public abstract class Sku {
         return discount.get();
     }
 }
+
 

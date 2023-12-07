@@ -27,7 +27,7 @@ public enum SkuTypes {
         return Stream.of(SkuTypes.values())
             .anyMatch(skuType-> skuType.name().equals(possibleSku.toString()));
     }
-    
+
     public static SkuTypes getSkuTypeByCharacter(final Character possibleSku){
         return Stream.of(SkuTypes.values())
             .filter(skuType-> skuType.name().equals(possibleSku.toString()))
@@ -37,4 +37,5 @@ public enum SkuTypes {
 
 
 }
+
 

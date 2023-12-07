@@ -1,16 +1,16 @@
 package befaster.solutions.CHK.inventoryitems;
 
+import java.util.Map;
+
 public class ItemB extends Sku{
 
-    private static final Integer BASE_COST = 30;
+    public static final Integer BASE_COST = 30;
 
-    private static final Integer DISCOUNT_VALUE = 15;
-
-    private static final Integer NUMBER_OF_UNITS_FOR_DISCOUNT = 2;
-
+    private static final Map<Integer,Integer> DISCOUNT_PAIRS = Map.of(2, 15);
 
     public ItemB() {
-        super(BASE_COST, DISCOUNT_VALUE, NUMBER_OF_UNITS_FOR_DISCOUNT, SkuTypes.B);
+        super(BASE_COST, SkuTypes.B, DISCOUNT_PAIRS);
     }
 
 }
+
