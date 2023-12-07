@@ -16,23 +16,36 @@ public class Inventory {
 
 
     public Integer calculateTotal(final String skus){
+
         checkoutValue = new AtomicInteger();
+
         updateCheckoutList(skus);
+
         removeFreeItemsWithPromotions();
+        removeGroupingOffer();
+
         checkoutItems.forEach((k, v) -> checkoutValue.addAndGet(v.totalCost()));
+
         return checkoutValue.get();
     }
 
+    //Creates a Map where for each SKU character, there's an instance of the Item{Character} class
+    // with the appropriate count.
     private void updateCheckoutList(final String skus) {
         checkoutItems = new HashMap<>();
+
         for (int i = 0; i < skus.length(); i++) {
-            final Character sku = skus.charAt(i);
-            checkoutItems.compute(sku, (k, v) -> {
+
+            final Character skuCharacter = skus.charAt(i);
+
+            checkoutItems.compute(skuCharacter, (k, v) -> {
                 if (v == null) {
-                    final Sku item = SkuTypes.getSkuTypeByCharacter(sku).getSkuItem();
+                    //Create a new Sku instance and make sure to reset its count.
+                    final Sku item = SkuTypes.getSkuTypeByCharacter(skuCharacter).getSkuItem();
                     item.resetCount();
                     return item;
                 } else {
+                    //Increment the count of the existent sku instance.
                     v.incrementCount();
                     return v;
                 }
@@ -46,7 +59,6 @@ public class Inventory {
         removeFreeItemsIfPossible(SkuTypes.N.getCharacter(), SkuTypes.M.getCharacter(), 3);
         removeFreeItemsIfPossible(SkuTypes.R.getCharacter(), SkuTypes.Q.getCharacter(), 3);
         removeFreeItemsIfPossible(SkuTypes.U.getCharacter(), SkuTypes.U.getCharacter(), 4);
-        removeGroupingOffer();
     }
 
     private void removeGroupingOffer(){
@@ -71,7 +83,8 @@ public class Inventory {
                 if(totalOfDecrementsNecessary <= 0 )
                     break;
                 if( checkoutItems.containsKey(skuType.getCharacter())){
-                    Sku currentSku = checkoutItems.get(skuType.getCharacter());
+                    final Sku currentSku = checkoutItems.get(skuType.getCharacter());
+                    //We only decrement the count until 0.
                     int skuCountAfterDecrement = Math.max(currentSku.getCount() - totalOfDecrementsNecessary, 0);
                     totalOfDecrementsNecessary -= currentSku.getCount();
                     currentSku.setCount(skuCountAfterDecrement);
@@ -109,3 +122,4 @@ public class Inventory {
 
 
 }
+
