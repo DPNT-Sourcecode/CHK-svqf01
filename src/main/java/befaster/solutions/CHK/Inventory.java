@@ -53,6 +53,8 @@ public class Inventory {
         final int requiredNumberItemsForGroupOffer = 3;
         int numberOfGroupOffersFound = 0;
 
+        int []
+
         groupOfferSkuTypes.forEach((skuTypes -> checkoutItems.));
 
     }
@@ -74,5 +76,6 @@ public class Inventory {
 
 
 }
+
 
 
