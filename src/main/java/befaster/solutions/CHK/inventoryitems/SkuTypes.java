@@ -55,6 +55,11 @@ public enum SkuTypes {
             .findFirst()
             .orElseThrow(() -> new UnexistentSkuException(possibleSku));
     }
+    
+    public Character getCharacter(){
+        return this.getCharacter();
+    }
 
 
 }
+

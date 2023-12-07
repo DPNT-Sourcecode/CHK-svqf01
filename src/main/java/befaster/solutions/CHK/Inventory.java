@@ -1,7 +1,6 @@
 package befaster.solutions.CHK;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,53 +41,62 @@ public class Inventory {
     }
 
     private void removeFreeItemsWithPromotions() {
-        removeFreeItemsIfPossible(SkuTypes.E.toString().charAt(0), SkuTypes.B.toString().charAt(0), 2);
-        removeFreeItemsIfPossible(SkuTypes.F.toString().charAt(0), SkuTypes.F.toString().charAt(0), 3);
-        removeFreeItemsIfPossible(SkuTypes.N.toString().charAt(0), SkuTypes.M.toString().charAt(0), 3);
-        removeFreeItemsIfPossible(SkuTypes.R.toString().charAt(0), SkuTypes.Q.toString().charAt(0), 3);
-        removeFreeItemsIfPossible(SkuTypes.U.toString().charAt(0), SkuTypes.U.toString().charAt(0), 4);
+        removeFreeItemsIfPossible(SkuTypes.E.getCharacter(), SkuTypes.B.getCharacter(), 2);
+        removeFreeItemsIfPossible(SkuTypes.F.getCharacter(), SkuTypes.F.getCharacter(), 3);
+        removeFreeItemsIfPossible(SkuTypes.N.getCharacter(), SkuTypes.M.getCharacter(), 3);
+        removeFreeItemsIfPossible(SkuTypes.R.getCharacter(), SkuTypes.Q.getCharacter(), 3);
+        removeFreeItemsIfPossible(SkuTypes.U.getCharacter(), SkuTypes.U.getCharacter(), 4);
         removeGroupingOffer();
     }
 
     private void removeGroupingOffer(){
-        List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.S, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
+        removeGroupOffersGivenSkuTypes(List.of(SkuTypes.S, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z), 3, 45);
+    }
+
+    private void removeGroupOffersGivenSkuTypes(final List<SkuTypes> initialSkuTypesList, final int groupSize, final int groupValue) {
+        
+        List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(initialSkuTypesList);
+        
+        //Sort them in a descendent way by price
         groupOfferSkuTypes.sort((v1, v2) -> v2.getSkuItem().getBaseCost() - v1.getSkuItem().getBaseCost());
 
-        int [] aux = new int[3];
+
+        int numberOfGroupOffer = getNumberOfGroupOffers(groupOfferSkuTypes, aux);
+
+        while(numberOfGroupOffer > 0){
+            int totalItemsDecremented = 0;
+            for (SkuTypes skuType: groupOfferSkuTypes) {
+                if(totalItemsDecremented == groupSize){
+                    break;
+                }
+                if(checkoutItems.containsKey(skuType.getCharacter())){
+                    checkoutItems.get(skuType.getCharacter()).decrementCount();
+                    totalItemsDecremented++;
+                }
+            }
+            checkoutValue.addAndGet(groupValue );
+            numberOfGroupOffer--;
+        }
+    }
+
+    private int getNumberOfGroupOffers(List<SkuTypes> groupOfferSkuTypes, int groupSize) {
+        int [] auxiliarArray = new int[groupSize];
 
         groupOfferSkuTypes.forEach((skuTypes -> {
-            for(int i = 0; i < aux.length; i++){
-                if(checkoutItems.containsKey(skuTypes.toString().charAt(0)) && checkoutItems.get(skuTypes.toString().charAt(0)).getCount() > aux[i]){
-                    aux[i] = checkoutItems.get(skuTypes.toString().charAt(0)).getCount();
+            for(int i = 0; i < auxiliarArray.length; i++){
+                if(checkoutItems.containsKey(skuTypes.getCharacter()) && checkoutItems.get(skuTypes.getCharacter()).getCount() > auxiliarArray[i]){
+                    auxiliarArray[i] = checkoutItems.get(skuTypes.getCharacter()).getCount();
                     break;
                 }
             }
         }));
 
         int numberOfGroupOffer = Integer.MAX_VALUE;
-        for (int j : aux) {
+        for (int j : auxiliarArray) {
             if (numberOfGroupOffer > j)
                 numberOfGroupOffer = j;
         }
-
-        System.out.println(numberOfGroupOffer);
-
-
-        while(numberOfGroupOffer > 0){
-            int totalItemsDecremented = 0;
-            for (SkuTypes skuType: groupOfferSkuTypes) {
-                if(totalItemsDecremented == 3){
-                    break;
-                }
-                if(checkoutItems.containsKey(skuType.toString().charAt(0))){
-                    checkoutItems.get(skuType.toString().charAt(0)).decrementCount();
-                    totalItemsDecremented++;
-                }
-            }
-            checkoutValue.addAndGet(45 );
-            numberOfGroupOffer--;
-        }
-
+        return numberOfGroupOffer;
     }
 
 
@@ -108,6 +116,7 @@ public class Inventory {
 
 
 }
+
 
 
 
