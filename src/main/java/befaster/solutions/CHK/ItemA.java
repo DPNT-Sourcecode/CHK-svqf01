@@ -1,2 +1,5 @@
-package befaster.solutions.CHK;public class ItemA {
+package befaster.solutions.CHK;
+
+public class ItemA {
 }
+

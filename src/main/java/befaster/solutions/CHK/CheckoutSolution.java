@@ -1,5 +1,6 @@
 package befaster.solutions.CHK;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import befaster.runner.SolutionNotImplementedException;
@@ -17,6 +18,12 @@ public class CheckoutSolution {
         System.out.println(e.getMessage());
         return -1;
     }
+
+    final Map<Character, Integer> totalNumberOfItems = calculateTotalNumberOfItems(skus);
+
+
+
+
     return 0;
     }
 
@@ -29,6 +36,33 @@ public class CheckoutSolution {
         }
     }
 
+    public Map<Character, Integer> calculateTotalNumberOfItems(final String input){
+        final Map<Character, Integer> totalNumberOfItems = new HashMap<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            final Character sku = input.charAt(i);
+            totalNumberOfItems.compute(sku, (k, v) -> {
+                if(v == null){
+                    return 1;
+                }
+                else{
+                    return ++v;
+                }
+            });
+        }
+
+        return totalNumberOfItems;
+    }
+
+    public Map<Character, Integer> calculateTotalNumberOfItems(final Map<Character, Integer> totalNumberOfItems){
+        final Integer billTotal = 0;
+
+//        totalNumberOfItems.fo
+
+        return totalNumberOfItems;
+    }
+
 
 }
+
 

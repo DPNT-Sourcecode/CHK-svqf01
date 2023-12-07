@@ -1,2 +1,8 @@
-package befaster.solutions.CHK;public interface Sku {
+package befaster.solutions.CHK;
+
+public interface Sku {
+
+
+
 }
+
