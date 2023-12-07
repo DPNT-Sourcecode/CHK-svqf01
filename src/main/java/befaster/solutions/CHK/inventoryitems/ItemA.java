@@ -1,19 +1,16 @@
 package befaster.solutions.CHK.inventoryitems;
 
-public class ItemA  implements  InventoryItem{
+public class ItemA  extends Sku{
 
-    int baseCost = 50;
+    private static final Integer BASE_COST = 50;
 
-    int discountCost = 20;
+    private static final Integer DISCOUNT_VALUE = 20;
 
-    int discountUnitPackage = 3;
+    private static final Integer NUMBER_OF_UNITS_FOR_DISCOUNT = 3;
 
-    int count;
-
-    @Override
-    public Integer totalCost() {
-        int numberOfTimesToApplyDiscount = count / discountUnitPackage;
-        return (baseCost * count) - numberOfTimesToApplyDiscount * discountCost;
+    public ItemA() {
+        super(BASE_COST, DISCOUNT_VALUE, NUMBER_OF_UNITS_FOR_DISCOUNT, SkuTypes.A);
     }
 
 }
+
