@@ -84,9 +84,8 @@ public class Inventory {
 
         //Create an array of groupSize where the min value is the max number of groups offers.
         groupOfferSkuTypes.forEach((skuTypes -> {
-            if(checkoutItems.containsKey(skuTypes.getCharacter()) &&
-                checkoutItems.get(skuTypes.getCharacter()).getCount() > groupSize){
-                numberOfGroupOffers.set(checkoutItems.get(skuTypes.getCharacter()).getCount());
+            if(checkoutItems.containsKey(skuTypes.getCharacter())){
+                numberOfGroupOffers.getAndAdd(checkoutItems.get(skuTypes.getCharacter()).getCount());
             }
         }));
 
@@ -110,4 +109,5 @@ public class Inventory {
 
 
 }
+
 
