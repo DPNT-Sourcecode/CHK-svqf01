@@ -15,4 +15,3 @@ public class ItemA  extends Sku{
     }
 
 }
-
