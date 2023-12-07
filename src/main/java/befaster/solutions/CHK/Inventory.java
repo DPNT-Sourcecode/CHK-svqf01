@@ -38,7 +38,7 @@ public class Inventory {
 
     private void removeFreeItemsWithPromotions() {
         removeFreeItemsIfPossible(SkuTypes.E.toString().charAt(0), SkuTypes.B.toString().charAt(0), 2);
-        removeFreeItemsIfPossible(SkuTypes.F.toString().charAt(0), SkuTypes.F.toString().charAt(0), 2);
+        removeFreeItemsIfPossible(SkuTypes.F.toString().charAt(0), SkuTypes.F.toString().charAt(0), 3);
     }
 
     private void removeFreeItemsIfPossible(Character promoSkuType, Character freeSkuType, Integer numberOfItemsPerPromo) {
@@ -57,3 +57,4 @@ public class Inventory {
 
 
 }
+
