@@ -67,7 +67,10 @@ public class Inventory {
 
         while(totalOfDecrementsNecessary > 0){
             for (SkuTypes skuType: groupOfferSkuTypes) {
-                if(checkoutItems.containsKey(skuType.getCharacter())){
+                //no need to keep going when no more decrements are necessary
+                if(totalOfDecrementsNecessary <= 0 )
+                    break;
+                if( checkoutItems.containsKey(skuType.getCharacter())){
                     Sku currentSku = checkoutItems.get(skuType.getCharacter());
                     int skuCountAfterDecrement = Math.max(currentSku.getCount() - totalOfDecrementsNecessary, 0);
                     totalOfDecrementsNecessary -= currentSku.getCount();
@@ -80,7 +83,6 @@ public class Inventory {
     private int getNumberOfGroupOffers(List<SkuTypes> groupOfferSkuTypes, int groupSize) {
         AtomicInteger numberOfGroupOffers = new AtomicInteger();
 
-        //Create an array of groupSize where the min value is the max number of groups offers.
         groupOfferSkuTypes.forEach((skuTypes -> {
             if(checkoutItems.containsKey(skuTypes.getCharacter())){
                 numberOfGroupOffers.getAndAdd(checkoutItems.get(skuTypes.getCharacter()).getCount());
@@ -107,6 +109,3 @@ public class Inventory {
 
 
 }
-
-
-
