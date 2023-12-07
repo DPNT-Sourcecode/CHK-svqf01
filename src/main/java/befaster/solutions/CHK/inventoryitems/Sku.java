@@ -22,6 +22,10 @@ public abstract class Sku {
         discountPairs.put(numberOfItemsForDiscount, discountValue);
     }
 
+    public int getBaseCost() {
+        return baseCost;
+    }
+
     public void incrementCount() {
         count++;
     }

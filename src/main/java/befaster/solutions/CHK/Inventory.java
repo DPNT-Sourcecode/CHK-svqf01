@@ -1,5 +1,7 @@
 package befaster.solutions.CHK;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +48,10 @@ public class Inventory {
     }
 
     private void removeGroupingOffer(){
-        List<SkuTypes> groupOfferSkuTypes = List.of(SkuTypes.Z, SkuTypes.Y, SkuTypes.X, SkuTypes.Y, SkuTypes.Z);
+        List<SkuTypes> groupOfferSkuTypes = new ArrayList<>(List.of(SkuTypes.Z, SkuTypes.T, SkuTypes.X, SkuTypes.Y, SkuTypes.Z));
+        groupOfferSkuTypes.sort(Comparator.comparingInt(skuType -> skuType.getSkuItem().getBaseCost()));
         final int requiredNumberItemsForGroupOffer = 3;
-        List.of
+        int numberOfGroupOffersFound = 0;
 
         groupOfferSkuTypes.forEach((skuTypes -> checkoutItems.));
 
@@ -71,4 +74,5 @@ public class Inventory {
 
 
 }
+
 
